@@ -1,27 +1,34 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>~Songs~</title>
+        <link rel="stylesheet" href="{% static 'songs/style.css' %}">
     </head>
 
     <body>
         <div class="home-button">
-            <a href="/songs">Home</a>
+            <a class=href="/songs">Home</a>
         </div>
 
-        <div class="recent-songs">
-            <h1>New Songs Recommended</h1>
-                {% if latest_song_list %}
-                <ul>
-                {% for song in latest_song_list %}
-                    <li><a href="{% url 'songs:detail' song.id %}">{{ song.title }}</a></li>
-                {% endfor %}
-                </ul>
-            {% else %}
-                <p>No songs are available.</p>
-            {% endif %}
+        <div class="recent-container">
+            <h1 class="recent-title">New Songs Recommended</h1>
+                <div class="recent-song-container">
+                    {% if latest_song_list %}
+                        <ul>
+                    {% for song in latest_song_list %}
+                            <div class="recent-song">
+                                <h2><a href="{% url 'songs:detail' song.id %}">{{ song.title }}</a></h2>
+                                <p>{{ song.artist }}</p>
+                            </div>
+                    {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No songs are available.</p>
+                    {% endif %}
+                </div>
         </div>
 
         <div class="artist-link">

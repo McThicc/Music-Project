@@ -4,6 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.template import loader #Could theoretically remove but I'm keeping it to remember I can render each URL this way
 from django.urls import reverse
 from django.views import generic
+from django.utils import timezone
 
 from .models import Song, Artist
 
@@ -16,8 +17,8 @@ class IndexView(generic.ListView):
     context_object_name = "latest_song_list"
 
     def get_queryset(self):
-        """Return the last five published songs."""
-        return Song.objects.order_by("-pub_date")[:5]
+        """Return the last five published songs (That are out)."""
+        return Song.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
     
 class ArtistsIndexView(generic.ListView):
     template_name = "songs/artists.html"

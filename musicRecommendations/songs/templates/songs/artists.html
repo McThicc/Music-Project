@@ -1,9 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>~Artists~</title>
+        <link rel="stylesheet" href="{% static 'songs/style.css' %}">
     </head>
 
     <body>
@@ -17,7 +19,7 @@
                 {% if latest_artist_list %}
                 <ul>
                 {% for artist in latest_artist_list %}
-                    <li><a href="{% url 'songs:artistdetail' artist.id %}">{{ artist.name }}</a></li>
+                    <h2><a href="{% url 'songs:artistdetail' artist.id %}">{{ artist.name }}</a></h2>
                 {% endfor %}
                 </ul>
             {% else %}
