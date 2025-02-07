@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>~Artists~</title>
+    </head>
+
+    <body>
+
+        <div class="home-button">
+            <a href="/songs">Home</a>
+        </div>
+
+        <div class="recent-artists">
+            <h1>New Artists Recommended</h1>
+                {% if latest_artist_list %}
+                <ul>
+                {% for artist in latest_artist_list %}
+                    <li><a href="{% url 'songs:artistdetail' artist.id %}">{{ artist.name }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No songs are available.</p>
+            {% endif %}
+        </div>
+    </body>

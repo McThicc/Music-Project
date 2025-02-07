@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{{ song }}</title>
+    </head>
+
+    <body>
+        <div class="home-button">
+            <a href="/songs">Home</a>
+        </div>
+
+        <h1>{{ song }}</h1>
+        <h2>{{ song.artist }}</h2>
+        <h2>{{ song.genre }}</h2>
+
+        <form action="{% url 'songs:vote' song.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Vote">
+        </form>
+    </body>
