@@ -16,10 +16,6 @@
             {% for song in artist.song_set.all %}
             <div>
                 <a href="{% url 'songs:detail' song.id %}">{{ song.title }}</a>
-                <form action="{% url 'songs:vote' song.id %}" method="post">
-                    {% csrf_token %}
-                    <input type="submit" value="Vote">
-                </form>
             </div>
             <br>
             {% endfor %}

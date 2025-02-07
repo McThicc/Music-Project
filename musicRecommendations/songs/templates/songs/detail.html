@@ -12,8 +12,9 @@
         </div>
 
         <h1>{{ song }}</h1>
-        <h2>{{ song.artist }}</h2>
-        <h2>{{ song.genre }}</h2>
+        <h2>By: {{ song.artist }}</h2>
+        <h2>Genre: {{ song.genre }}</h2>
+        <h3>Upvotes: {{ song.votes }}</h3>
 
         <form action="{% url 'songs:vote' song.id %}" method="post">
             {% csrf_token %}
