@@ -9,7 +9,11 @@ body {
 a {
     text-decoration: none;
     color: inherit; 
-}  
+}
+
+a:hover {
+    color: rgb(24, 77, 77);
+}
 
 .recent-container {
     width: 100%;
@@ -24,7 +28,18 @@ a {
 .recent-song {
     width: 100%;
     height: 100%;
-    border: solid black 1px;
+    border: solid rgb(62, 64, 66) 1px;
+    border-radius: 20px;
+}
+
+.recent-song img {
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+}
+
+.recent-song:hover {
+    color: rgb(24, 77, 77);
 }
 
 .artist-link {
@@ -37,4 +52,27 @@ a {
     margin: 0 auto;
     margin-top: 250px;
     padding-top: 30px;
+}
+
+.song-container {
+    width:60%;
+    height: 1000px;
+    margin: 0 auto;
+    background-color: white;
+    border: solid black 1px;
+    border-radius: 20px;
+    margin-top: 50px;
+    color: black;
+}
+
+.top-container {
+    width:60%;
+    height: 50px;
+    margin: 0 auto;
+    background-color: white;
+    border: solid black 1px;
+    border-radius: 20px;
+    margin-top: 50px;
+    color: black;
+    padding-top:20px;
 }

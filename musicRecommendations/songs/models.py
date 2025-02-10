@@ -1,5 +1,6 @@
 import datetime
-
+import requests
+from decouple import config
 from django.db import models
 from django.utils import timezone
 
@@ -16,12 +17,37 @@ class Genre(models.Model):
     def __str__(self):
         return self.genre_name
 
+
+class Album(models.Model):
+    album_name = models.CharField(max_length=200)
+    artist_name = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    pub_date = models.DateTimeField("date published")
+    def __str__(self):
+        return self.album_name
+    def fetch_album_image(self):
+        api_key = config('LAST_FM_API_KEY')
+        url = f'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key={api_key}&artist={self.artist.name}&album={self.album_name}&format=json'
+        response = requests.get(url)
+        print(f"API URL: {url}")
+        print(f"Response Status Code: {response.status_code}")
+        if response.status_code == 200:
+            data = response.json()
+            print(f"API Response: {data}")
+            if 'album' in data and 'image' in data['album']:
+                images = data['album']['image']
+                if images:
+                    self.image_url = images[-1]['#text']
+                    print(f"Image URL: {self.image_url}")
+                    self.save()
+
 #The model for a song contains its title, artist, genre, and number of votes it has
 #As well as the pub date
 class Song(models.Model):
     title = models.CharField(max_length=200)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    featured_artists = models.ManyToManyField(Artist, related_name='featured_artists', blank=True)
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE)
     pub_date = models.DateTimeField("date published")
     votes = models.IntegerField(default=0)
     def __str__(self):

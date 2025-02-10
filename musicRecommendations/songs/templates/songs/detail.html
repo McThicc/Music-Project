@@ -9,17 +9,28 @@
     </head>
 
     <body>
-        <div class="home-button">
-            <a href="/songs">Home</a>
+        <div class="top-container">
+            <div class="home-button">
+                <a href="/songs">Home</a>
+            </div>
         </div>
 
-        <h1>{{ song }}</h1>
-        <h2>By: {{ song.artist }}</h2>
-        <h2>Genre: {{ song.genre }}</h2>
-        <h3>Upvotes: {{ song.votes }}</h3>
+        <div class="song-container">
+            <h1>{{ song }}</h1>
+            <a href="{% url 'songs:artistdetail' song.artist.id %}"> {{ song.artist }}</a>
+            <h2>By: {{ song.artist }}</h2>
+            <h2>Genre: {{ song.genre }}</h2>
+            <h3>Upvotes: {{ song.votes }}</h3>
 
-        <form action="{% url 'songs:vote' song.id %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Vote">
-        </form>
+            {% if song.album.image_url %}
+                <img src="{{ song.album.image_url }}" alt="{{ song.album.album_name }} album cover">
+            {% else %}
+                <p>No album cover available.</p>
+            {% endif %}
+
+            <form action="{% url 'songs:vote' song.id %}" method="post">
+                {% csrf_token %}
+                <input type="submit" value="Vote">
+            </form>
+        </div>
     </body>
