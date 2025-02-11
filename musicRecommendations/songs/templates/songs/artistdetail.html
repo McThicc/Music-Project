@@ -6,18 +6,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{{ artist }}</title>
         <link rel="stylesheet" href="{% static 'songs/style.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
     </head>
 
     <body>
-        <div class="home-button">
-            <a href="/songs">Home</a>
+        <div class="top-container">
+            <button class="top-button" onclick="window.location.href='/songs'">
+                <h2>Home</h2>
+            </button>
+            <button class="top-button" onclick="window.location.href='/songs'">
+                <h2>Songs</h2>
+            </button>
+            <button class="top-button" onclick="window.location.href='/songs/artists/'">
+                <h2>Artists</h2>
+            </button>
         </div>
 
         <h1>{{ artist }}</h1>
         <ul>
             {% for song in artist.song_set.all %}
-            <div>
-                <a href="{% url 'songs:detail' song.id %}">{{ song.title }}</a>
+            <div class="artist-song">
+                <h2><a href="{% url 'songs:detail' song.id %}">{{ song.title }}</a></h2>
             </div>
             <br>
             {% endfor %}

@@ -1,9 +1,18 @@
+.raleway-regular {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
 body {
     background-color: #1e252c;
     width: 100%;
     height: 100%;
     text-align: center;
     color:white;
+    font-family: "Raleway", serif;
+    margin: 0 auto;
 }
 
 a {
@@ -11,25 +20,47 @@ a {
     color: inherit; 
 }
 
-a:hover {
-    color: rgb(24, 77, 77);
+button {
+    border: none;
+    background-color: white;
+    transition: box-shadow 0.3s ease;
+}
+
+button:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .recent-container {
     width: 100%;
     height: 100%;
+    margin: 0 auto;
 }
 
 .recent-song-container {
-    width: 100%;
+    width: 60%;
     height: 100%;
+    margin: 0 auto;
+    padding: 20px;
 }
 
 .recent-song {
-    width: 100%;
-    height: 100%;
+    width: 200px;
+    height: 200px;
     border: solid rgb(62, 64, 66) 1px;
     border-radius: 20px;
+    background-color: white;
+    color: black;
+    display: space-between;
+    margin: 0 auto;
+    padding: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.recent-song:hover {
+    color: rgb(24, 77, 77);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .recent-song img {
@@ -38,20 +69,36 @@ a:hover {
     border-radius: 20px;
 }
 
-.recent-song:hover {
-    color: rgb(24, 77, 77);
+.recent-album-cover {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
 }
 
-.artist-link {
-    color:white;
-    width: 200px;
-    height: 50px;
-    border: solid black 1px;
-    border-radius: 10px;
-    background-color: #27568d;
+.song-title-container {
+    width: 80%;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
     margin: 0 auto;
-    margin-top: 250px;
-    padding-top: 30px;
+    padding-bottom: 0px;
+}
+
+.song-title {
+    width: 100%;
+    height: 50px;
+    display: inline-block;
+    animation: scroll-title 10s linear infinite;
+    animation-play-state: paused;
+}
+
+@keyframes scroll-title {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
 }
 
 .song-container {
@@ -63,10 +110,16 @@ a:hover {
     border-radius: 20px;
     margin-top: 50px;
     color: black;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.song-container:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .top-container {
-    width:60%;
+    width:500px;
     height: 50px;
     margin: 0 auto;
     background-color: white;
@@ -74,5 +127,30 @@ a:hover {
     border-radius: 20px;
     margin-top: 50px;
     color: black;
-    padding-top:20px;
+    padding: 5px;
+    display: inline-flex;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.top-container:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.top-button {
+    width: 20%;
+    color: black;
+    margin: 0 auto;
+}
+
+.top-button:hover {
+    background-color: #27568d;
+    border-radius: 15px;
+    color: white;
+}
+
+.artist-song {
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
 }

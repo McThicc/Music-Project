@@ -6,13 +6,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>~Songs~</title>
         <link rel="stylesheet" href="{% static 'songs/style.css' %}">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
     </head>
 
     <body>
         <div class="top-container">
-            <div class="home-button">
-                <a class=href="/songs">Home</a>
-            </div>
+            <button class="top-button" onclick="window.location.href='/songs'">
+                <h2>Home</h2>
+            </button>
+            <button class="top-button" onclick="window.location.href='/songs'">
+                <h2>Songs</h2>
+            </button>
+            <button class="top-button" onclick="window.location.href='/songs/artists/'">
+                <h2>Artists</h2>
+            </button>
         </div>
 
         <div class="recent-container">
@@ -22,8 +32,21 @@
                         <ul>
                     {% for song in latest_song_list %}
                             <div class="recent-song">
-                                <h2><a href="{% url 'songs:detail' song.id %}">{{ song.title }}</a></h2>
-                                <p><a href="{% url 'songs:detail' song.id %}">{{ song.artist }}</a></p>
+                                <div class="recent-album-cover">
+                                    {% if song.album.image_url %}
+                                        <img src="{{ song.album.image_url }}" alt="{{ song.album.album_name }} album cover">
+                                    {% else %}
+                                        <p>No album cover available.</p>
+                                    {% endif %}
+                                </div>
+                                <div class="recent-song-info">
+                                    <div class="song-title-container">
+                                        <div class="song-title" data-title="{{ song.title }}">
+                                            <h2><a href="{% url 'songs:detail' song.id %}">{{ song.title }}</a></h2>
+                                        </div>
+                                    </div>
+                                    <p><a href="{% url 'songs:artistdetail' song.artist.id %}"> {{ song.artist }}</a></p>
+                                </div>
                             </div>
                     {% endfor %}
                         </ul>
@@ -32,8 +55,24 @@
                     {% endif %}
                 </div>
         </div>
-
-        <div class="artist-link">
-            <a href="/songs/artists/">Artists?</a>
-        </div>
     </body>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const songTitles = document.querySelectorAll('.song-title');
+        
+            songTitles.forEach(title => {
+                const container = title.parentElement;
+                if ((title.scrollWidth) > (container.clientWidth)) {
+                    title.style.animationPlayState = 'running';
+                    console.log(title.scrollWidth);
+                    console.log(container.clientWidth); // Start the animation if the title is too long
+                }
+                else {
+                    console.log(title.scrollWidth);
+                    console.log(container.clientWidth);
+                }
+            });
+        });
+    </script>
+</html>

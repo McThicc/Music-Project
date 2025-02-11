@@ -22,11 +22,16 @@ class Album(models.Model):
     album_name = models.CharField(max_length=200)
     artist_name = models.ForeignKey(Artist, on_delete=models.CASCADE)
     pub_date = models.DateTimeField("date published")
+    image_url = models.URLField(max_length=200, blank=True, null=True)
     def __str__(self):
         return self.album_name
+    def save(self, *args, **kwargs):
+        if not self.image_url:
+            self.fetch_album_image()
+        super().save(*args, **kwargs)
     def fetch_album_image(self):
         api_key = config('LAST_FM_API_KEY')
-        url = f'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key={api_key}&artist={self.artist.name}&album={self.album_name}&format=json'
+        url = f'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key={api_key}&artist={self.artist_name}&album={self.album_name}&format=json'
         response = requests.get(url)
         print(f"API URL: {url}")
         print(f"Response Status Code: {response.status_code}")
