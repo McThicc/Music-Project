@@ -10,5 +10,3 @@ urlpatterns = [
     path("artists/<int:pk>/", views.ArtistDetailView.as_view(), name="artistdetail"),
     path("<int:song_id>/vote/", views.vote, name="vote"),
 ]
-
-#pk and song/artist_id are essentially the same thing but they're different enough for me to be scared of messing with the voting system for now

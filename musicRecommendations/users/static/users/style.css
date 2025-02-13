@@ -22,7 +22,7 @@ a {
 
 h2 {
     margin-bottom: 20px;
-    font-family: 'Raleway', sans-serif; /* Change the font for the headings */
+    font-family: 'Raleway', sans-serif;
 }
 
 button {
@@ -42,11 +42,11 @@ form {
 }
 
 form label {
-    font-family: 'Raleway', sans-serif; /* Change the font for the form labels */
+    font-family: 'Raleway', sans-serif;
 }
 
 form input {
-    font-family: 'Raleway', sans-serif; /* Change the font for the form inputs */
+    font-family: 'Raleway', sans-serif;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -61,7 +61,7 @@ form button {
     border-radius: 5px;
     cursor: pointer;
     margin-top: 10px;
-    font-family: 'Raleway', sans-serif; /* Change the font for the form button */
+    font-family: 'Raleway', sans-serif;
 }
 
 form button:hover {
