@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.views import generic
 from django.utils import timezone
 
-from .models import Song, Artist
+from .models import Song, Artist, Album
 
 #ListView vs. DetailView
 #DetailView - self.object contains the object the view is working on and gets certain methods and attributes
@@ -19,6 +19,11 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the last five published songs (That are out)."""
         return Song.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['latest_album_list'] = Album.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date")[:5]
+        return context
     
 class ArtistsIndexView(generic.ListView):
     template_name = "songs/artists.html"

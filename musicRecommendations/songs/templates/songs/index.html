@@ -12,6 +12,14 @@
     </head>
     </head>
 
+    {% if user.is_authenticated %}
+        <div class="top-left-container">
+                <button class="top-left-button" onClick="window.location.href='/users/signup/'">
+                    <h2>Post</h2>
+                </button>
+        </div>
+    {% endif %}
+
     <body>
         <div class="top-container">
             <button class="top-button" onclick="window.location.href='/songs'">
@@ -25,11 +33,28 @@
             </button>
         </div>
 
+        <div class="top-right-container">
+            {% if user.is_authenticated %}
+                <p>Welcome, <a class="username-decoration" href="{% url 'users:profile' user.id %}">{{ user.username }}</a></p>
+            {% else %}
+                <button class="top-right-button" onClick="window.location.href='/users/signup/'">
+                    <h2>Sign Up</h2>
+                </button>
+                <button class="top-right-button" onClick="window.location.href='/users/login/'">
+                    <h2>Login</h2>
+                </button>
+            {% endif %}
+        </div>
+
+        <div class="welcome-container">
+            <h1>Welcome to Jonesify</h1>
+            <p>Don't worry the name isn't sticking</p>
+        </div>
+
+        <h1 class="recent-title">New Songs Recommended</h1>
         <div class="recent-container">
-            <h1 class="recent-title">New Songs Recommended</h1>
                 <div class="recent-song-container">
                     {% if latest_song_list %}
-                        <ul>
                     {% for song in latest_song_list %}
                             <div class="recent-song">
                                 <div class="recent-album-cover">
@@ -49,9 +74,37 @@
                                 </div>
                             </div>
                     {% endfor %}
-                        </ul>
                     {% else %}
                         <p>No songs are available.</p>
+                    {% endif %}
+                </div>
+        </div>
+
+        <h1 class="recent-title">New Albums Recommended</h1>
+        <div class="recent-container">
+                <div class="recent-album-container">
+                    {% if latest_album_list %}
+                    {% for album in latest_album_list %}
+                            <div class="recent-album">
+                                <div class="recent-album-cover">
+                                    {% if album.image_url %}
+                                        <img src="{{ album.image_url }}" alt="{{ album.album_name }} album cover">
+                                    {% else %}
+                                        <p>No album cover available.</p>
+                                    {% endif %}
+                                </div>
+                                <div class="recent-album-info">
+                                    <div class="album-title-container">
+                                        <div class="album-title" data-title="{{ album.title }}">
+                                            <h2>{{ album.album_name }}</h2>
+                                        </div>
+                                    </div>
+                                    <p><a href="{% url 'songs:artistdetail' album.artist_name.id %}"> {{ album.artist_name }}</a></p>
+                                </div>
+                            </div>
+                    {% endfor %}
+                    {% else %}
+                        <p>No albums are available.</p>
                     {% endif %}
                 </div>
         </div>
@@ -66,7 +119,23 @@
                 if ((title.scrollWidth) > (container.clientWidth)) {
                     title.style.animationPlayState = 'running';
                     console.log(title.scrollWidth);
-                    console.log(container.clientWidth); // Start the animation if the title is too long
+                    console.log(container.clientWidth);
+                }
+                else {
+                    console.log(title.scrollWidth);
+                    console.log(container.clientWidth);
+                }
+            });
+        });
+        document.addEventListener("DOMContentLoaded", function() {
+            const albumTitles = document.querySelectorAll('.album-title');
+        
+            albumTitles.forEach(title => {
+                const container = title.parentElement;
+                if ((title.scrollWidth) > (container.clientWidth)) {
+                    title.style.animationPlayState = 'running';
+                    console.log(title.scrollWidth);
+                    console.log(container.clientWidth);
                 }
                 else {
                     console.log(title.scrollWidth);

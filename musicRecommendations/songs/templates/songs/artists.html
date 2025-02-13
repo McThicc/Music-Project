@@ -14,6 +14,14 @@
 
     <body>
 
+        {% if user.is_authenticated %}
+            <div class="top-left-container">
+                    <button class="top-left-button" onClick="window.location.href='/users/signup/'">
+                        <h2>Post</h2>
+                    </button>
+            </div>
+        {% endif %}
+
         <div class="top-container">
             <button class="top-button" onclick="window.location.href='/songs'">
                 <h2>Home</h2>
@@ -24,6 +32,19 @@
             <button class="top-button" onclick="window.location.href='/songs/artists/'">
                 <h2>Artists</h2>
             </button>
+        </div>
+
+        <div class="top-right-container">
+            {% if user.is_authenticated %}
+                <p>Welcome, <a class="username-decoration" href="{% url 'users:profile' user.id %}">{{ user.username }}</a></p>
+            {% else %}
+                <button class="top-right-button" onClick="window.location.href='/users/signup/'">
+                    <h2>Sign Up</h2>
+                </button>
+                <button class="top-right-button" onClick="window.location.href='/users/login/'">
+                    <h2>Login</h2>
+                </button>
+            {% endif %}
         </div>
 
         <div class="recent-artists">
