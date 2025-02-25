@@ -9,12 +9,15 @@ class Artist(models.Model):
     name = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published", default=timezone.now)
     image_url = models.URLField(max_length=200, blank=True, null=True)
+
     def __str__(self):
         return self.name
+    
     def save(self, *args, **kwargs):
         if not self.image_url:
             self.fetch_artist_image()
         super().save(*args, **kwargs)
+        
     def fetch_artist_image(self):
         api_key = config('LAST_FM_API_KEY')
         url = f'http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist={self.name}&api_key={api_key}&format=json'
@@ -29,6 +32,7 @@ class Artist(models.Model):
 #The Genre model is kind of bare bones right now but once I actually start working on the recommendation side of this app, I feel like it will come very much in handy
 class Genre(models.Model):
     genre_name = models.CharField(max_length=200)
+
     def __str__(self):
         return self.genre_name
 
@@ -38,26 +42,25 @@ class Album(models.Model):
     artist_name = models.ForeignKey(Artist, on_delete=models.CASCADE)
     pub_date = models.DateTimeField("date published")
     image_url = models.URLField(max_length=200, blank=True, null=True)
+
     def __str__(self):
         return self.album_name
+    
     def save(self, *args, **kwargs):
         if not self.image_url:
             self.fetch_album_image()
         super().save(*args, **kwargs)
-    def fetch_album_image(self):
+
+    def fetch_album_image(self): #I removed the printing of the data in this function because it seems to be working and I don't need it
         api_key = config('LAST_FM_API_KEY')
         url = f'http://ws.audioscrobbler.com/2.0/?method=album.getinfo&api_key={api_key}&artist={self.artist_name}&album={self.album_name}&format=json'
         response = requests.get(url)
-        print(f"API URL: {url}")
-        print(f"Response Status Code: {response.status_code}")
         if response.status_code == 200:
             data = response.json()
-            print(f"API Response: {data}")
             if 'album' in data and 'image' in data['album']:
                 images = data['album']['image']
                 if images:
                     self.image_url = images[-1]['#text']
-                    print(f"Image URL: {self.image_url}")
                     self.save()
 
 #The model for a song contains its title, artist, genre, and number of votes it has
@@ -70,8 +73,10 @@ class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     pub_date = models.DateTimeField("date published")
     votes = models.IntegerField(default=0)
+
     def __str__(self):
         return self.title
+    
     def was_published_recently(self):
         now = timezone.now()
         return now - datetime.timedelta(days=1) <= self.pub_date <= now

@@ -1,0 +1,62 @@
+.raleway-regular {
+    font-family: "Raleway", serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  body {
+    background-color: #1e252c;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    color:white;
+    font-family: "Raleway", serif;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: inherit; 
+}
+
+button {
+    border: none;
+    background-color: white;
+    transition: box-shadow 0.3s ease;
+}
+
+button:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.top-container {
+    width:500px;
+    height: 50px;
+    margin: 0 auto;
+    background-color: white;
+    border: solid black 1px;
+    border-radius: 20px;
+    margin-top: 50px;
+    color: black;
+    padding: 5px;
+    display: inline-flex;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.top-container:hover {
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+.top-button {
+    width: 20%;
+    color: black;
+    margin: 0 auto;
+}
+
+.top-button:hover {
+    background-color: #27568d;
+    border-radius: 15px;
+    color: white;
+}

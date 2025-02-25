@@ -22,6 +22,7 @@ class ProfileView(LoginRequiredMixin, DetailView):
     login_url = '/users/login/'
 
 class SignUpView(View):
+
     def get(self, request):
         form = SignUpForm()
         return render(request, "users/signup.html", {'form': form})
@@ -39,6 +40,7 @@ class SignUpView(View):
         return render(request, "users/signup.html", {'form': form})
 
 class LoginView(View):
+    
     def get(self, request):
         form = AuthenticationForm()
         return render(request, "users/login.html", {'form': form})
@@ -55,12 +57,14 @@ class LoginView(View):
         return render(request, "users/login.html", {'form': form})
 
 class LogoutView(View):
+
     def get(self, request):
         logout(request)
         return redirect('songs:index')
     
 class DeleteAccountView(LoginRequiredMixin, View):
     login_url = '/users/login/'
+
     def post(self, request, *args, **kwargs):
         user = request.user
         logout(request)

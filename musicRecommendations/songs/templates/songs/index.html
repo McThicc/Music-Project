@@ -10,17 +10,16 @@
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     </head>
-    </head>
-
-    {% if user.is_authenticated %}
-        <div class="top-left-container">
-                <button class="top-left-button" onClick="window.location.href='/users/signup/'">
-                    <h2>Post</h2>
-                </button>
-        </div>
-    {% endif %}
 
     <body>
+        {% if user.is_authenticated %}
+        <div class="top-left-container">
+            <button class="top-left-button" onclick="window.location.href='/posts'">
+                <h2>Post</h2>
+            </button>
+        </div>
+        {% endif %}
+
         <div class="top-container">
             <button class="top-button" onclick="window.location.href='/songs'">
                 <h2>Home</h2>

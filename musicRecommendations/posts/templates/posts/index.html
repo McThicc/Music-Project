@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Upload</title>
+        <link rel="stylesheet" href="{% static 'posts/style.css' %}"
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <div class="top-container">
+            <button class="top-button" onclick="window.location.href='/songs'">
+                <h2>Home</h2>
+            </button>
+            <button class="top-button" onclick="window.location.href='/songs'">
+                <h2>Songs</h2>
+            </button>
+            <button class="top-button" onclick="window.location.href='/songs/artists/'">
+                <h2>Artists</h2>
+            </button>
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="top-left-container">
+            <button class="top-left-button" onclick="window.location.href='/posts/add_song/'">
+                <h2>Add Song</h2>
+            </button>
+            <button class="top-left-button" onclick="window.location.href='/posts/add_genre/'">
+                <h2>Add Genre</h2>
+            </button>
+            <button class="top-left-button" onclick="window.location.href='/posts/add_album/'">
+                <h2>Add Album</h2>
+            </button>
+            <button class="top-left-button" onclick="window.location.href='/posts/add_artist/'">
+                <h2>Add Artist</h2>
+            </button>
+        </div>
+        {% endif %}
+    </body>
+</html>
